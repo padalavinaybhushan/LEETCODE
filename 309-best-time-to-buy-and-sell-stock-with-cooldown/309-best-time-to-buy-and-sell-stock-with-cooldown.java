@@ -1,29 +1,33 @@
 class Solution {
-   static int [][] memo;
-	static int n;
-	static int [] profit;
-	public static int dp(int idx, int state){
-		if(idx >= n)return 0;
-		if(memo[idx][state] != -1)return memo[idx][state];
-		int ans = Integer.MIN_VALUE;
-		if(state==0){ // state 0 -> you can buy or cool down
-			ans = Math.max(dp(idx+1, 1) - profit[idx], dp(idx+1, 0));
+    public int maxProfit(int[] prices) {
+		int[][] dp = new int[prices.length][3];
+        return calculateProfit(prices, dp, 0, 0); // state: 0 = buy, 1 = sell, 2 = cooldown
+    }
+	
+	private int calculateProfit(int[] prices, int[][] dp, int index, int state) {
+		if(index >= prices.length) return 0;
+		
+		if(dp[index][state] != 0) 
+			return dp[index][state];
+			
+		int profit = 0;
+		
+		if(state == 0) { // we have to buy in this state (or skip to buy later)
+			int buyNow = calculateProfit(prices, dp, index + 1, 1) - prices[index];
+			int buyLater = calculateProfit(prices, dp, index + 1, state); // skipping today, so sending the same state for the next day
+			
+			profit = Math.max(buyNow, buyLater);	
 		}
-		else if(state==1){ // state 1 -> you can sell or coll down
-			ans = Math.max(dp(idx+2, 0) + profit[idx], dp(idx+1, 1));
+		else if(state == 1) { // we have to sell in this state (or skip to sell later)
+			int sellNow = prices[index] + calculateProfit(prices, dp, index + 1, 2);
+			int sellLater = calculateProfit(prices, dp, index + 1, state); // skipping today, so sending the same state for the next day
+			
+			profit = Math.max(sellNow, sellLater);
 		}
-		return memo[idx][state] = ans;
-	}
-
-	public static int maxProfit(int[] prices) {
-		n = prices.length;
-		memo = new int[n][2];
-		profit = prices;
-		for (int [] x: memo) {
-			Arrays.fill(x, -1);
+		else if(state == 2) { // cooldown, we can buy stock the next day
+			profit = calculateProfit(prices, dp, index + 1, 0);
 		}
-
-		int ans = dp(0, 0);
-		return Math.max(ans, 0);
+				
+		return dp[index][state] = profit;
 	}
 }
