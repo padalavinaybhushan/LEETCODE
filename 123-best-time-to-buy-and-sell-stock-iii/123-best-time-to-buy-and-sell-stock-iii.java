@@ -1,12 +1,8 @@
 class Solution {
     public static int fun(int[] prices,int inde ,int statee,int cape,int[][][] dp)
     {
-        if(cape == 0) return 0;
-        if(inde == prices.length ) return 0;
-        // if(dp[ind][state][cap] != 0)
-        // {
-        //     return dp[ind][state][cap];
-        // }
+        // if(cape == 0) return 0;
+        // if(inde == prices.length ) return 0;
         for(int ind =prices.length-1;ind>=0;ind--){
             for(int state=0;state<=1;state++){
                 for(int cap= 2;cap>0;cap--)
