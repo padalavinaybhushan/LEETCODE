@@ -18,7 +18,7 @@ class BSTIterator {
     ArrayList<Integer> arr;
     int count;
     int size;
-    boolean flag;
+    //boolean flag;
     public void inorder(TreeNode root,ArrayList<Integer> arr)
     {
         if(root == null) return;
@@ -32,9 +32,6 @@ class BSTIterator {
         count=0;
         inorder(root,arr);
         size = arr.size();
-        System.out.println(arr);
-        if(root == null) flag = false;
-        flag = true;
         
     }
     
