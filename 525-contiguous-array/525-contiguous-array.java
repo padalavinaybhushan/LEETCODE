@@ -23,7 +23,7 @@ class Solution {
             {
                 hm.put(pre,i);
             }
-            if(hm.containsKey(pre - sum))
+            else
             {
                 res = Math.max(res,i-hm.get(pre));
             }
