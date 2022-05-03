@@ -1,15 +1,19 @@
 class Solution {
     public boolean isPerfectSquare(int num) {
-        double sq = Math.sqrt(num);
-        int sqint = (int)(sq);
-        if(sq-sqint == 0)
+        int low = 0,high= num;
+        if(num == 1) return true;//edge case
+        while(low <= high)
         {
-            return true;
+            int mid = low+(high-low)/2;
+            if(mid == 0)
+            {
+                if(mid == num) return true;
+                else return false;
+            }
+            if(mid == (num*1.0)/mid) return true;
+            if(mid > num/mid) high = mid-1;
+            else low = mid+1;
         }
-        else
-        {
-            return false;
-        }
-        
+        return false;
     }
 }
