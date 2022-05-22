@@ -30,9 +30,9 @@ class Solution {
         {
              int tem = odd(s,len,i);
                 ans += (tem/2 + 1);
-           System.out.println((tem/2 + 1)+"  "+ s.charAt(i)+ " odd "+odd(s,len,i));
+           //System.out.println((tem/2 + 1)+"  "+ s.charAt(i)+ " odd "+odd(s,len,i));
              tem = even(s,len,i);
-            System.out.println((tem/2)+"  "+ s.charAt(i)+ "  even "+even(s,len,i));
+            //System.out.println((tem/2)+"  "+ s.charAt(i)+ "  even "+even(s,len,i));
             ans += (tem/2 );
             
         }
