@@ -1,14 +1,7 @@
 class NumMatrix {
     int[][] arr;
     public NumMatrix(int[][] matrix) {
-        arr = new int[matrix.length][matrix[0].length];
-        for(int i=0;i<arr.length;i++)
-        {
-            for(int j=0;j<arr[0].length;j++)
-            {
-                arr[i][j] = matrix[i][j];
-            }
-        }
+        arr = matrix;
         for(int i=0;i<arr.length;i++)
         {
             for(int j=1;j<arr[0].length;j++)
@@ -16,15 +9,26 @@ class NumMatrix {
                 arr[i][j] += arr[i][j-1];
             }
         }
+        for(int i=0;i<arr[0].length;i++)
+        {
+            for(int j=1;j<arr.length;j++)
+            {
+                arr[j][i] += arr[j-1][i];
+            }
+        }
     }
     
     public int sumRegion(int row1, int col1, int row2, int col2) {
-        int sum=0;
-        for(int i=row1;i<=row2;i++)
+        int sum=0,extra=0;
+        if(row1 != 0)
         {
-            sum += ((col1!=0)?(arr[i][col2]-arr[i][col1-1]):(arr[i][col2]));
+            extra += (arr[row1-1][col2]);
         }
-        return sum;
+        if(col1 != 0)
+        {
+            extra += (arr[row2][col1-1]);
+        }
+        return arr[row2][col2]-extra+((row1!=0 && col1!=0)?(arr[row1-1][col1-1]):0);
     }
 }
 
