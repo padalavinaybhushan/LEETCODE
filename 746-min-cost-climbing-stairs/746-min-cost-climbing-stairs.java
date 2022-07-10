@@ -14,7 +14,7 @@ class Solution {
             }
             arr[i] = Math.min(arr[i-1],arr[i-2])+nums[i];
         }
-        System.out.println(Arrays.toString(arr));
+       // System.out.println(Arrays.toString(arr));
         return arr[len];
     }
 }
