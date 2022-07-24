@@ -28,9 +28,17 @@ class Solution {
                 ans= tem;
             }
             else{
-                ans= floor(matrix[i],0,matrix[0].length-1,target);
-                if(ans == Integer.MIN_VALUE) return false;
-                if(matrix[i][ans] == target) return true;
+                if(matrix[i][ans] > target ){
+                    ans= floor(matrix[i],0,ans,target);
+                    if(ans == Integer.MIN_VALUE) return false;
+                    if(matrix[i][ans] == target) return true;
+                }
+                else{
+                    ans= floor(matrix[i],ans,matrix[0].length-1,target);
+                    if(ans == Integer.MIN_VALUE) return false;
+                    if(matrix[i][ans] == target) return true;    
+                }
+                
             }
         }
         return false;
