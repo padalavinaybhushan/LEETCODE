@@ -1,32 +1,42 @@
 class Solution {
-    public int[] searchRange(int[] nums, int target) {
-        TreeMap<Integer,Integer> tm = new TreeMap<>();
-        for(int i:nums)
-        {
-            tm.put(i,tm.getOrDefault(i,0)+1);
-        }
-        int[] ans = new int[2];
-        int curr =-1;
-        if(tm.containsKey(target))
-        {
-            for(Map.Entry<Integer,Integer> t : tm.entrySet())
-            {
-                int key = t.getKey();
-                int val = t.getValue();
-                if(key == target)
-                {
-                    ans[0] = (++curr);
-                    ans[1] = val-1+curr;
-                    return ans;
-                }
-                else
-                {
-                    curr += (val);
-                }
+    public static int floor(int[] arr,int tar,int i,int j){
+        int low=i,high=j,ans=-1;
+        while(low<=high){
+            int mid = low+(high-low)/2;
+            if(arr[mid] == tar){
+                ans=mid;
+                high=mid-1;
+            }
+            else if(arr[mid] < tar){
+                low=mid+1;
+            }
+            else{
+                high = mid-1;
             }
         }
-            Arrays.fill(ans,-1);
-            return ans;
-        
+        return ans;
+    }
+    public static int ceil(int[] arr,int tar,int i,int j){
+        int low=i,high=j,ans=-1;
+        while(low<=high){
+            int mid = low+(high-low)/2;
+            if(arr[mid] == tar){
+                ans=mid;
+                low=mid+1;
+            }
+            else if(arr[mid] < tar){
+                low=mid+1;
+            }
+            else{
+                high = mid-1;
+            }
+        }
+        return ans;
+    }
+    public int[] searchRange(int[] nums, int target) {
+        int ans[] = new int[2];
+        ans[0]=floor(nums,target,0,nums.length-1);
+        ans[1]=ceil(nums,target,0,nums.length-1);
+        return ans;
     }
 }
