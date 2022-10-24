@@ -13,7 +13,7 @@ class Solution {
             return ;
         }
         if(count(prev)+count(a.get(ind))==(count(prev|a.get(ind)))){
-            solve(val,a,ind+1,prev^a.get(ind),n);
+            solve(val,a,ind+1,prev|a.get(ind),n);
         }
         solve(val,a,ind+1,prev,n);
     }
